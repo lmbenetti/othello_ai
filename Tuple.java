@@ -9,8 +9,9 @@ public class Tuple implements Comparable<Tuple> {
     }
 
     public void updateUtility(GameState s){
+        int y =  s.getPlayerInTurn();
         int[] utilArr = s.countTokens();
-        int utilDiff = utilArr[0]-utilArr[1];
+        int utilDiff = utilArr[1]-utilArr[0];
         utility = utilDiff;
     }
 

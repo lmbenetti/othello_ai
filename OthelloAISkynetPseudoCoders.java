@@ -21,6 +21,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                 tempBoard.insertToken(action);
                 Tuple tuple2 = minValue(tempBoard);
                 tuple2.setPosition(action);
+                tuple2.updateUtility(tempBoard);
 
                 if (tuple2.compareTo(tupleUtilMove) > 0) {
                     tupleUtilMove = tuple2;
@@ -45,6 +46,8 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                 tempBoard.insertToken(action);
                 Tuple tuple2 = maxValue(tempBoard);
                 tuple2.setPosition(action);
+                tuple2.updateUtility(tempBoard);
+
 
                 if (tuple2.compareTo(tupleUtilMove) < 0) {
                     tupleUtilMove = tuple2;
