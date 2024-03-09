@@ -8,10 +8,13 @@ public class Tuple implements Comparable<Tuple> {
         this.position = position;
     }
 
-    public void updateUtility(GameState s){
-        int y =  s.getPlayerInTurn();
+    public void updateUtility(GameState s, Boolean firstPlayer){
         int[] utilArr = s.countTokens();
-        int utilDiff = utilArr[1]-utilArr[0];
+        int utilDiff = 0;
+        if (firstPlayer) {
+            utilDiff = utilArr[0]-utilArr[1];
+        } else utilDiff = utilArr[1]-utilArr[0];
+        
         utility = utilDiff;
     }
 
