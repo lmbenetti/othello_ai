@@ -10,8 +10,8 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
     }
 
     public Position decideMove(GameState s) {
-        depp = 1000000;
         int count = s.countTokens()[0] + s.countTokens()[1];
+        depp = count - 4 + 24;
         if (count == 4) {
             firstPlayer = true;
         }
@@ -20,9 +20,9 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
     }
 
     public Tuple maxValue(GameState s, int alpha, int beta) {
-        Tuple tupleUtilMove = new Tuple(Integer.MIN_VALUE, new Position(-1, -1));
+        Tuple tupleUtilMove = new Tuple(Integer.MIN_VALUE, new Position(-10, -10));
 
-        if (s.isFinished() || depp <= 0) {
+        if (s.isFinished() || s.countTokens()[0] + s.countTokens()[1] <= depp) {
             tupleUtilMove.updateUtility(s, firstPlayer);
             return tupleUtilMove;
         } else {
@@ -40,20 +40,18 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                 }
 
                 if (tupleUtilMove.getUtility() >= beta) {
-                    depp--;
                     return tupleUtilMove;
                 }
 
             }
         }
-        depp--;
         return tupleUtilMove;
     }
 
     public Tuple minValue(GameState s, int alpha, int beta) {
-        Tuple tupleUtilMove = new Tuple(Integer.MAX_VALUE, new Position(-1, -1));
+        Tuple tupleUtilMove = new Tuple(Integer.MAX_VALUE, new Position(-10, -10));
 
-        if (s.isFinished() || depp <= 0) {
+        if (s.isFinished() || s.countTokens()[0] + s.countTokens()[1] <= depp) {
             tupleUtilMove.updateUtility(s, firstPlayer);
             return tupleUtilMove;
         } else {
@@ -71,13 +69,11 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                 }
 
                 if (tupleUtilMove.getUtility() <= alpha) {
-                    depp--;
                     return tupleUtilMove;
                 }
 
             }
         }
-        depp--;
         return tupleUtilMove;
     }
 
