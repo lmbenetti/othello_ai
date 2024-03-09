@@ -10,7 +10,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
     }
 
     public Position decideMove(GameState s) {
-        depp = 1000;
+        depp = 1000000;
         int count = s.countTokens()[0] + s.countTokens()[1];
         if (count == 4) {
             firstPlayer = true;
@@ -35,8 +35,8 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                 tuple2.setPosition(action);
 
                 if (tuple2.compareTo(tupleUtilMove) > 0) {
-                    alpha = Math.max(alpha, tupleUtilMove.getUtility());
                     tupleUtilMove = tuple2;
+                    alpha = Math.max(alpha, tupleUtilMove.getUtility());
                 }
 
                 if (tupleUtilMove.getUtility() >= beta) {
@@ -51,7 +51,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
     }
 
     public Tuple minValue(GameState s, int alpha, int beta) {
-        Tuple tupleUtilMove = new Tuple(Integer.MAX_VALUE, new Position(0, 2));
+        Tuple tupleUtilMove = new Tuple(Integer.MAX_VALUE, new Position(-1, -1));
 
         if (s.isFinished() || depp <= 0) {
             tupleUtilMove.updateUtility(s, firstPlayer);
@@ -66,8 +66,8 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                 tuple2.setPosition(action);
 
                 if (tuple2.compareTo(tupleUtilMove) < 0) {
-                    beta = Math.min(beta, tupleUtilMove.getUtility());
                     tupleUtilMove = tuple2;
+                    beta = Math.min(beta, tupleUtilMove.getUtility());
                 }
 
                 if (tupleUtilMove.getUtility() <= alpha) {
