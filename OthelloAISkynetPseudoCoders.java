@@ -20,6 +20,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                 GameState tempBoard = new GameState(s.getBoard(), s.getPlayerInTurn());
                 tempBoard.insertToken(action);
                 Tuple tuple2 = minValue(tempBoard);
+                tuple2.setPosition(action);
 
                 if (tuple2.compareTo(tupleUtilMove) > 0) {
                     tupleUtilMove = tuple2;
@@ -43,6 +44,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                 GameState tempBoard = new GameState(s.getBoard(), s.getPlayerInTurn());
                 tempBoard.insertToken(action);
                 Tuple tuple2 = maxValue(tempBoard);
+                tuple2.setPosition(action);
 
                 if (tuple2.compareTo(tupleUtilMove) < 0) {
                     tupleUtilMove = tuple2;
