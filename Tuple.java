@@ -11,11 +11,32 @@ public class Tuple implements Comparable<Tuple> {
     public void updateUtility(GameState s, Boolean firstPlayer){
         int[] utilArr = s.countTokens();
         int utilDiff = 0;
+        int[][] board = s.getBoard();
         if (firstPlayer) {
             utilDiff = utilArr[0]-utilArr[1];
         } else utilDiff = utilArr[1]-utilArr[0];
-        
-        utility = utilDiff;
+        utility = utilDiff+checkCorners(board, firstPlayer);
+    }
+    private int checkCorners (int[][] board, Boolean firstPlayer){
+        int player = 2;
+        int utToReturn = 0;
+        if (firstPlayer){
+            player = 1;
+        }
+        if (board[0][0] == player){
+            utToReturn+=3;;
+        }
+        if (board[0][board.length-1] == player){
+            utToReturn+=3;;
+        }
+        if (board[board.length-1][0] == player){
+            utToReturn+=3;;
+        }
+        if (board[board.length-1][board.length-1] == player){
+            utToReturn+=3;;
+        }
+
+        return utToReturn;
     }
 
     public int getUtility() {

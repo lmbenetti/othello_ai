@@ -52,7 +52,6 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                     if (tupleUtilMove.getUtility() >= beta) {
                         return tupleUtilMove;
                     }
-
                 }
             }
         }
@@ -90,7 +89,6 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                         tupleUtilMove = tuple2;
                         beta = Math.min(beta, tupleUtilMove.getUtility());
                     }
-
                     if (tupleUtilMove.getUtility() <= alpha) {
                         return tupleUtilMove;
                     }
@@ -99,5 +97,4 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
         }
         return tupleUtilMove;
     }
-
 }
