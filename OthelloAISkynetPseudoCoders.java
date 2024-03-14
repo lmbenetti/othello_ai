@@ -15,11 +15,9 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
         if (count == 4) {
             firstPlayer = true;
         }
-
         return maxValue(s, Integer.MIN_VALUE, Integer.MAX_VALUE).getPosition();
     }
 
-    
     public Tuple maxValue(GameState s, int alpha, int beta) {
         Tuple tupleUtilMove = new Tuple(Integer.MIN_VALUE, new Position(-10, -10));
 
@@ -28,7 +26,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
             return tupleUtilMove;
         } else {
             ArrayList<Position> moves = s.legalMoves();
-            if (moves.isEmpty()){
+            if (moves.isEmpty()) {
                 GameState tempBoard = new GameState(s.getBoard(), s.getPlayerInTurn());
                 tempBoard.changePlayer();
                 Tuple tuple2 = maxValue(tempBoard, beta, alpha);
@@ -39,8 +37,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                 if (tupleUtilMove.getUtility() >= beta) {
                     return tupleUtilMove;
                 }
-            }
-            else {
+            } else {
                 for (Position action : moves) {
                     GameState tempBoard = new GameState(s.getBoard(), s.getPlayerInTurn());
                     tempBoard.insertToken(action);
@@ -70,7 +67,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
             return tupleUtilMove;
         } else {
             ArrayList<Position> moves = s.legalMoves();
-            if (moves.isEmpty()){
+            if (moves.isEmpty()) {
                 GameState tempBoard = new GameState(s.getBoard(), s.getPlayerInTurn());
                 tempBoard.changePlayer();
                 Tuple tuple2 = minValue(tempBoard, alpha, beta);
@@ -81,9 +78,8 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                 if (tupleUtilMove.getUtility() <= alpha) {
                     return tupleUtilMove;
                 }
-            }
-            else {
-                
+            } else {
+
                 for (Position action : moves) {
                     GameState tempBoard = new GameState(s.getBoard(), s.getPlayerInTurn());
                     tempBoard.insertToken(action);
