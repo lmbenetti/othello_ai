@@ -10,7 +10,6 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
     }
 
     public Position decideMove(GameState s) {
-        System.out.println("decision made");
         int count = s.countTokens()[0] + s.countTokens()[1];
         depp = count - 4 + 12;
         if (count == 4) {
