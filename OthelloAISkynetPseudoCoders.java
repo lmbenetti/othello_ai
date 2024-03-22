@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 /**
- * A Class implementing the IOthelloAI interface that plays Othello applying a MiniMax algorithm with AlphaBeta pruning. 
+ * A Class implementing the IOthelloAI interface that plays Othello applying a MiniMax algorithm with AlphaBeta pruning.
+ * The decideMove, maxValue and minValue methods are largely based on the pseudo code provided in S. Russel & P. Norvig's
+ * "Artificial Intelligence" book
  * @author DFEJ, HOHO, LIMB, LKAZ, LUCH, @itu.dk
  * @version 19.3.2024
  */
@@ -18,7 +20,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
     }
 
     /**
-	 * Implementation of the IOthelloAI interface method decideMove. It decides the best movement applying MiniMax.   
+	 * Implementation of the IOthelloAI interface method decideMove. It decides the best movement applying MiniMax.  
      * @param s a GameState object that represents a board at a certain point in the game.
      * @return a Position object, the next movement according to the GameState
 	 */
