@@ -1,19 +1,15 @@
 import java.util.ArrayList;
-/**
- * A Class implementing the IOthelloAI interface that plays Othello applying a MiniMax algorithm with AlphaBeta pruning. 
- * @author DFEJ, HOHO, LIMB, LKAZ, LUCH, @itu.dk
- * @version 19.3.2024
- */
-public class OthelloAISkynetPseudoCoders implements IOthelloAI {
+
+public class BasicAI implements IOthelloAI {
 
     private Boolean firstPlayer;
-    private int depth;
+    private int depp;
 
      /**
 	 * Constructor of the OthelloAISkynetPseudoCoders.
      * It takes no parameters and sets that the AI is not the first player by default.
 	 */
-    public OthelloAISkynetPseudoCoders() {
+    public BasicAI() {
         this.firstPlayer = false;
     }
 
@@ -24,8 +20,8 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
 	 */
     public Position decideMove(GameState s) {
         int count = s.countTokens()[0] + s.countTokens()[1]; //The amount of takens on the board
-        depth = count - 4 + 12; //Set the depth of the MiniMax search 12 movements ahead.
-        if (count == 4) { //If the board has only 4 tokens, the AI is player one.
+        depp = count - 4 + 12; //Set the depth of the MiniMax search 12 movements ahead.
+        if (count == 4) { //If the board has only 4 tokes, the AI is player one.
             firstPlayer = true;
         }
         return maxValue(s, Integer.MIN_VALUE, Integer.MAX_VALUE).getPosition();
@@ -38,9 +34,9 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
      * @param beta an integer with the value of beta. Is Integer.MAX_VALUE when called for the first time.
      * @return a Position object, the next movement according to the GameState
 	 */
-    private Tuple maxValue(GameState s, int alpha, int beta) {
-        Tuple tupleUtilMove = new Tuple(Integer.MIN_VALUE, new Position(-10, -10)); //Empty tupple created.
-        if (s.isFinished() || s.countTokens()[0] + s.countTokens()[1] >= depth) { //End of the three or the game. Checks the depth of the serach.
+    private Tuple2 maxValue(GameState s, int alpha, int beta) {
+        Tuple2 tupleUtilMove = new Tuple2(Integer.MIN_VALUE, new Position(-10, -10)); //Empty tupple created.
+        if (s.isFinished() || s.countTokens()[0] + s.countTokens()[1] >= depp) { //End of the three or the game. Checks the depth of the serach.
             tupleUtilMove.updateUtility(s, firstPlayer);
             return tupleUtilMove;
         } else {
@@ -48,7 +44,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
             if (moves.isEmpty()) { //If the game is not finished but there are no more movements to perform by the AI
                 GameState tempBoard = new GameState(s.getBoard(), s.getPlayerInTurn());
                 tempBoard.changePlayer();
-                Tuple tuple2 = maxValue(tempBoard, beta, alpha);
+                Tuple2 tuple2 = maxValue(tempBoard, beta, alpha);
                 if (tuple2.compareTo(tupleUtilMove) > 0) {
                     tupleUtilMove = tuple2;
                     alpha = Math.max(alpha, tupleUtilMove.getUtility());
@@ -60,7 +56,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                 for (Position action : moves) { //If there are movements.
                     GameState tempBoard = new GameState(s.getBoard(), s.getPlayerInTurn());
                     tempBoard.insertToken(action);
-                    Tuple tuple2 = minValue(tempBoard, alpha, beta);
+                    Tuple2 tuple2 = minValue(tempBoard, alpha, beta);
                     tuple2.setPosition(action);
 
                     if (tuple2.compareTo(tupleUtilMove) > 0) {
@@ -84,9 +80,9 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
      * @param beta an integer with the value of beta. Is Integer.MIN_VALUE when called for the first time.
      * @return a Position object, the next movement according to the GameState
 	 */
-    private Tuple minValue(GameState s, int alpha, int beta) {
-        Tuple tupleUtilMove = new Tuple(Integer.MAX_VALUE, new Position(-15, -15)); //Empty tupple created.
-        if (s.isFinished() || s.countTokens()[0] + s.countTokens()[1] >= depth) { //End of the three or the game. Checks the depth of the search.
+    private Tuple2 minValue(GameState s, int alpha, int beta) {
+        Tuple2 tupleUtilMove = new Tuple2(Integer.MAX_VALUE, new Position(-15, -15)); //Empty tupple created.
+        if (s.isFinished() || s.countTokens()[0] + s.countTokens()[1] >= depp) { //End of the three or the game. Checks the depth of the search.
             tupleUtilMove.updateUtility(s, firstPlayer);
             return tupleUtilMove;
         } else {
@@ -94,7 +90,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
             if (moves.isEmpty()) { //If the game is not finished but there are no more movements to perform by the AI
                 GameState tempBoard = new GameState(s.getBoard(), s.getPlayerInTurn());
                 tempBoard.changePlayer();
-                Tuple tuple2 = minValue(tempBoard, alpha, beta);
+                Tuple2 tuple2 = minValue(tempBoard, alpha, beta);
                 if (tuple2.compareTo(tupleUtilMove) < 0) {
                     tupleUtilMove = tuple2;
                     beta = Math.min(beta, tupleUtilMove.getUtility());
@@ -107,7 +103,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
                 for (Position action : moves) { //If there are movements.
                     GameState tempBoard = new GameState(s.getBoard(), s.getPlayerInTurn());
                     tempBoard.insertToken(action);
-                    Tuple tuple2 = maxValue(tempBoard, alpha, beta);
+                    Tuple2 tuple2 = maxValue(tempBoard, alpha, beta);
                     tuple2.setPosition(action);
 
                     if (tuple2.compareTo(tupleUtilMove) < 0) {
