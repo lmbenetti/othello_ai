@@ -25,8 +25,8 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
      * @return a Position object, the next movement according to the GameState
 	 */
     public Position decideMove(GameState s) {
-        int count = s.countTokens()[0] + s.countTokens()[1]; //The amount of takens on the board
-        depth = count - 4 + 12; //Set the depth of the MiniMax search 12 movements ahead.
+        int count = s.countTokens()[0] + s.countTokens()[1]; //The amount of tokens on the board
+        depth = count + 8; //Set the depth of the MiniMax search 8 movements ahead.
         if (count == 4) { //If the board has only 4 tokens, the AI is player one.
             firstPlayer = true;
         }
