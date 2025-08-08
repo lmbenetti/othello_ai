@@ -1,5 +1,5 @@
 /**
- * A Tuple Class that assists the OthelloAISkynetPseudoCoders Class. It carries two values: a move to perform, called 'position', and the utility of that move.
+ * A Tuple Class that assists the MiniMaxABPruning Class. It carries two values: a move to perform, called 'position', and the utility of that move.
  * It implements Comparable so that tuples can be compared based on utility.
  * @author DFEJ, HOHO, LIMB, LKAZ, LUCH, @itu.dk
  * @version 19.3.2024

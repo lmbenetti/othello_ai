@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author DFEJ, HOHO, LIMB, LKAZ, LUCH, @itu.dk
  * @version 19.3.2024
  */
-public class OthelloAISkynetPseudoCoders implements IOthelloAI {
+public class MiniMaxABPruning implements IOthelloAI {
 
     private Boolean firstPlayer;
     private int depth;
@@ -15,7 +15,7 @@ public class OthelloAISkynetPseudoCoders implements IOthelloAI {
 	 * Constructor of the OthelloAISkynetPseudoCoders.
      * It takes no parameters and sets that the AI is not the first player by default.
 	 */
-    public OthelloAISkynetPseudoCoders() {
+    public MiniMaxABPruning() {
         this.firstPlayer = false;
     }
 
