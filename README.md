@@ -1,7 +1,7 @@
 # Othello AI 🎯
 
 This is a Java-based implementation of the classic board game **Othello**. It supports both **human and AI players**. 
-This project was developed as part of the course Introducction to Artificial Intelligence from the IT University of Copenhagen. The Java code that runs the game was provided by the course manager.
+This project was developed as part of the course Introduction to Artificial Intelligence from the IT University of Copenhagen. The Java code that runs the game was provided by the course manager.
 
 The task was to create an implementation of the interface IOthelloAI using a MiniMax Algorithm with Alpha-Beta pruning, applying algorithmic logic, and designing clear, maintainable object-oriented code.
 
